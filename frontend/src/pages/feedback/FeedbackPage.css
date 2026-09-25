@@ -1,0 +1,334 @@
+/* ==========================================================================
+   VITALCONNECTAI - HALF PURPLE / HALF WHITE LUXURY FEEDBACK PAGE
+   ========================================================================== */
+
+.feedback-page-wrapper {
+  min-height: 100vh;
+  /* Top half rich royal violet/purple, bottom half crisp clean white */
+  background: linear-gradient(
+    to bottom,
+    #581c87 0%,
+    #6b21a8 25%,
+    #7e22ce 38%,
+    #9333ea 46%,
+    #faf5ff 48%,
+    #ffffff 52%,
+    #ffffff 100%
+  ) !important;
+  color: #1e1b4b !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding-bottom: 90px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Header on the purple half */
+.feedback-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  position: relative;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22) !important;
+}
+
+.feedback-back-btn {
+  border: 1px solid rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+  padding: 9px 18px;
+  border-radius: 99px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s ease;
+}
+
+.feedback-back-btn:hover {
+  background: #ffffff !important;
+  color: #6b21a8 !important;
+  transform: translateX(-3px);
+}
+
+.feedback-brand-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.feedback-brand-pill span span {
+  color: #e9d5ff !important;
+}
+
+.feedback-brand-pill .brand-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: #ffffff !important;
+  color: #7e22ce !important;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Container Bridging the Split */
+.feedback-content-shell {
+  max-width: 840px;
+  margin: 36px auto 0;
+  position: relative;
+  z-index: 5;
+}
+
+.feedback-luxury-card {
+  background: #ffffff !important;
+  border: 1px solid #e9d5ff !important;
+  border-radius: 28px;
+  padding: clamp(30px, 5vw, 56px);
+  box-shadow: 0 24px 60px rgba(107, 33, 168, 0.16) !important;
+}
+
+.feedback-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #7e22ce !important;
+  background: #faf5ff !important;
+  border: 1px solid #e9d5ff !important;
+  padding: 5px 14px;
+  border-radius: 99px;
+  font: 11px 'DM Mono', monospace;
+  letter-spacing: 1.4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.feedback-luxury-card h1 {
+  font-size: clamp(34px, 4.5vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #1e1b4b !important;
+  margin: 18px 0 16px;
+  font-weight: 700;
+}
+
+.feedback-luxury-card h1 em {
+  font-family: 'Playfair Display', serif;
+  color: #7e22ce !important;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.feedback-lede {
+  color: #581c87 !important;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 36px;
+  opacity: 0.85;
+}
+
+/* Form Groups */
+.feedback-luxury-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.section-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e1b4b;
+  margin-bottom: 10px;
+}
+
+/* Star Rating */
+.star-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.star-btn {
+  border: 0;
+  background: transparent;
+  color: #9333ea;
+  cursor: pointer;
+  padding: 4px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.15s ease;
+}
+
+.star-btn:hover {
+  transform: scale(1.15);
+}
+
+.rating-descriptor {
+  margin-left: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #7e22ce !important;
+}
+
+/* Category Pills */
+.feedback-pills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.feedback-pill-choice {
+  border: 1px solid #e9d5ff;
+  background: #faf5ff;
+  color: #6b21a8;
+  padding: 10px 18px;
+  border-radius: 99px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.feedback-pill-choice:hover {
+  border-color: #9333ea;
+  background: #f3e8ff;
+  color: #581c87;
+}
+
+.feedback-pill-choice.selected {
+  background: linear-gradient(135deg, #7e22ce, #6b21a8) !important;
+  border-color: #6b21a8 !important;
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(126, 34, 206, 0.28);
+}
+
+/* Inputs & Textareas */
+.form-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.feedback-luxury-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.feedback-luxury-form label span {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e1b4b;
+}
+
+.feedback-luxury-form input,
+.feedback-luxury-form textarea {
+  width: 100%;
+  border: 1px solid #e9d5ff;
+  background: #faf5ff;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: #1e1b4b;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.feedback-luxury-form input:focus,
+.feedback-luxury-form textarea:focus {
+  border-color: #7e22ce;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(126, 34, 206, 0.12);
+}
+
+/* Action Footer */
+.form-footer-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 20px;
+  border-top: 1px solid #f3e8ff;
+}
+
+.privacy-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #6b21a8;
+  font-weight: 500;
+}
+
+.feedback-submit-btn {
+  border: 0;
+  background: linear-gradient(135deg, #7e22ce, #581c87) !important;
+  color: #ffffff !important;
+  padding: 14px 28px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(126, 34, 206, 0.28);
+  transition: all 0.2s ease;
+}
+
+.feedback-submit-btn:hover {
+  background: linear-gradient(135deg, #9333ea, #6b21a8) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(126, 34, 206, 0.38);
+}
+
+/* Success Card */
+.feedback-success-card {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.feedback-success-card svg {
+  color: #7e22ce;
+}
+
+.feedback-success-card h3 {
+  font-size: 22px;
+  margin: 6px 0 0;
+  color: #1e1b4b;
+}
+
+.feedback-success-card p {
+  color: #6b21a8;
+  font-size: 14px;
+  margin: 0 0 16px;
+}
+
+@media (max-width: 640px) {
+  .form-two-col {
+    grid-template-columns: 1fr;
+  }
+  .form-footer-action {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+  .feedback-submit-btn {
+    justify-content: center;
+  }
+}

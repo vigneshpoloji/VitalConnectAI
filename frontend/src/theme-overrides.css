@@ -1,0 +1,405 @@
+/* Black-and-white luxury visual direction */
+
+body,
+main {
+  background: #050505;
+}
+
+.ambient-one {
+  background: radial-gradient(
+    circle,
+    #272727 0,
+    rgba(32, 32, 32, 0.38) 32%,
+    transparent 70%
+  );
+}
+
+.ambient-two {
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.14),
+    transparent 68%
+  );
+}
+
+/* White navigation */
+
+.nav {
+  max-width: none;
+  padding-left: max(32px, calc((100vw - 1176px) / 2));
+  padding-right: max(32px, calc((100vw - 1176px) / 2));
+  background: #f8f7f1;
+  color: #070707;
+}
+
+.brand {
+  color: #080808;
+}
+
+.brand > span:last-child span {
+  color: #555;
+}
+
+.brand-mark {
+  background: #080808;
+  color: #fff;
+}
+
+.nav-links {
+  margin-left: 46px;
+  margin-right: auto;
+  gap: 20px;
+}
+
+.nav-links a,
+.nav-link-button {
+  color: #313131;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.nav-links a:hover,
+.nav-link-button:hover {
+  color: #000;
+}
+
+.nav-link-button {
+  border: 0;
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-cta {
+  background: #080808;
+  color: #fff;
+}
+
+.menu-button {
+  color: #080808;
+}
+
+/* Black hero */
+
+.hero {
+  min-height: 590px;
+}
+
+.hero h1 em,
+h1 em,
+h2 em {
+  color: #f2f1eb;
+}
+
+.hero-text,
+.trust-row p {
+  color: #b6b6b2;
+}
+
+.button-primary {
+  background: #f6f4ee;
+  color: #080808;
+  box-shadow: none;
+}
+
+.button-primary:hover {
+  background: #d7d5ce;
+}
+
+.text-link {
+  color: #e8e7df;
+}
+
+/* White role section */
+
+.roles {
+  max-width: none;
+  background: #f7f6f0;
+  padding-left: max(32px, calc((100vw - 1176px) / 2));
+  padding-right: max(32px, calc((100vw - 1176px) / 2));
+}
+
+.roles .eyebrow {
+  color: #555;
+}
+
+.roles h2 {
+  color: #090909;
+}
+
+.roles h2 em {
+  color: #222;
+}
+
+.role-card,
+.role-card.donor,
+.role-card.hospital,
+.role-card.bank,
+.role-card.admin {
+  background: #101010;
+  border-color: #282828;
+}
+
+.role-card:hover {
+  border-color: #777;
+}
+
+.role-label,
+.role-card button {
+  color: #f4f2ec;
+}
+
+.role-copy {
+  color: #bdbdb7;
+}
+
+.role-icon {
+  background: #292929;
+}
+
+/* Black intelligence section */
+
+.intelligence {
+  background: #080808;
+  border-radius: 0;
+  max-width: none;
+  padding-left: max(32px, calc((100vw - 1176px) / 2));
+  padding-right: max(32px, calc((100vw - 1176px) / 2));
+}
+
+.intelligence::after {
+  background: #242424;
+}
+
+.intelligence .eyebrow,
+.intelligence h2 em {
+  color: #bdbdb7;
+}
+
+.intelligence h2 {
+  color: #f7f6f0;
+}
+
+.intelligence-copy > p:not(.eyebrow),
+.light {
+  color: #c3c2bc;
+}
+
+.dashboard {
+  background: #f7f6f0;
+  box-shadow: none;
+}
+
+/* White impact section */
+
+.impact {
+  max-width: none;
+  background: #f7f6f0;
+  padding-left: max(32px, calc((100vw - 1176px) / 2));
+  padding-right: max(32px, calc((100vw - 1176px) / 2));
+}
+
+.impact .eyebrow,
+.impact h2 em {
+  color: #555;
+}
+
+.impact h2,
+.metrics strong {
+  color: #090909;
+}
+
+.metrics div {
+  border-color: #bcbcb7;
+}
+
+.metrics small,
+.metrics p {
+  color: #5a5a55;
+}
+
+/* Black register section */
+
+.access {
+  background: #080808;
+  border-color: #333;
+}
+
+.access h2 {
+  color: #f7f6f0;
+}
+
+/* White footer */
+
+.footer {
+  max-width: none;
+  background: #f7f6f0;
+  color: #080808;
+  padding-left: max(32px, calc((100vw - 1176px) / 2));
+  padding-right: max(32px, calc((100vw - 1176px) / 2));
+}
+
+.footer p,
+.footer a {
+  color: #555;
+}
+
+/* VitalAI assistant */
+
+.ai-assistant {
+  position: fixed;
+  right: 27px;
+  bottom: 27px;
+  z-index: 15;
+}
+
+.bot-trigger {
+  width: 54px;
+  height: 54px;
+  border: 1px solid #777;
+  border-radius: 17px;
+  background: #f8f7f1;
+  color: #080808;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.3);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  position: relative;
+  margin-left: auto;
+}
+
+.bot-trigger i {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: #31ae70;
+  border: 2px solid white;
+  border-radius: 50%;
+  right: -2px;
+  top: -2px;
+}
+
+.bot-card {
+  width: 300px;
+  margin-bottom: 12px;
+  background: #fbfaf5;
+  color: #111;
+  border: 1px solid #d9d9d5;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.35);
+}
+
+.bot-header {
+  height: 50px;
+  background: #080808;
+  color: #fff;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bot-header span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.bot-header button {
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.bot-body {
+  padding: 19px 17px;
+}
+
+.bot-body p {
+  font-weight: 700;
+  font-size: 14px;
+  margin: 0 0 7px;
+}
+
+.bot-body span {
+  font-size: 12px;
+  line-height: 1.55;
+  color: #5a5a5a;
+}
+
+.bot-prompt {
+  margin: 0 13px 13px;
+  border: 1px solid #dededb;
+  border-radius: 10px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 12px;
+  color: #989895;
+  font-size: 11px;
+}
+
+.bot-prompt button {
+  border: 0;
+  background: #111;
+  color: #fff;
+  width: 29px;
+  height: 29px;
+  margin-right: 5px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+}
+
+/* Responsive navigation */
+
+@media (max-width: 1050px) {
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-links a,
+  .nav-link-button {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 860px) {
+  .nav-links.open {
+    background: #f8f7f1;
+    border-color: #d4d3ce;
+  }
+
+  .nav-links.open a,
+  .nav-links.open .nav-link-button {
+    color: #111;
+  }
+
+  .nav {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .roles,
+  .intelligence,
+  .impact,
+  .footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.nav-links {
+  margin-left: 46px;
+  margin-right: auto;
+  gap: 20px;
+}
+
+.nav-register {
+  margin-left: 16px;
+}

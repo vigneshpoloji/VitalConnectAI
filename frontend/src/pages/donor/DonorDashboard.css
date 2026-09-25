@@ -1,0 +1,1462 @@
+/* =========================================================
+   VitalConnectAI — Donor Dashboard
+   Stable layout with no blinking animations
+   ========================================================= */
+
+.donor-dashboard {
+  --donor-red: #c8102e;
+  --donor-red-dark: #720b1c;
+  --donor-red-soft: #fff0f3;
+  --donor-black: #0c0b0d;
+  --donor-ink: #1e171a;
+  --donor-muted: #75686d;
+  --donor-line: rgba(59, 35, 43, 0.12);
+  --donor-green: #14835c;
+  --donor-blue: #3474b6;
+  --donor-gold: #a96d08;
+
+  width: 100%;
+  min-width: 0;
+  min-height: calc(100vh - 64px);
+  color: var(--donor-ink);
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(200, 16, 46, 0.06),
+      transparent 32rem
+    ),
+    #f8f5f5;
+  overflow-x: hidden;
+}
+
+.donor-dashboard *,
+.donor-dashboard *::before,
+.donor-dashboard *::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.donor-dashboard button,
+.donor-dashboard input,
+.donor-dashboard select {
+  font: inherit;
+}
+
+.donor-dashboard button {
+  cursor: pointer;
+}
+
+.donor-dashboard button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.donor-dashboard-inner {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: clamp(22px, 2.8vw, 42px);
+}
+
+/* Remove blinking, pulsing and page-entry movement */
+
+.donor-dashboard *,
+.donor-dashboard *::before,
+.donor-dashboard *::after {
+  animation: none !important;
+}
+
+.donor-dashboard .donor-spin {
+  animation: none !important;
+}
+
+.donor-view {
+  width: 100%;
+}
+
+/* Welcome header */
+
+.donor-welcome {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.donor-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 9px;
+  color: var(--donor-red);
+  font-size: 0.67rem;
+  font-weight: 850;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.donor-kicker > i {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--donor-red);
+}
+
+.donor-welcome h1 {
+  margin: 0;
+  color: var(--donor-black);
+  font-size: clamp(2.2rem, 4vw, 4.1rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.donor-welcome h1 em {
+  color: var(--donor-red);
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.donor-welcome > div:first-child > p:last-child {
+  max-width: 690px;
+  margin: 13px 0 0;
+  color: var(--donor-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.donor-network-status {
+  min-width: 185px;
+  padding: 14px 17px;
+  border: 1px solid rgba(20, 131, 92, 0.14);
+  border-radius: 16px;
+  color: var(--donor-green);
+  background: #edf8f3;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.donor-network-status span,
+.donor-network-status strong {
+  display: block;
+}
+
+.donor-network-status span {
+  color: #698378;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.donor-network-status strong {
+  margin-top: 3px;
+  color: #126f50;
+  font-size: 0.8rem;
+}
+
+/* Hero */
+
+.donor-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.68fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.donor-command-card {
+  position: relative;
+  min-height: 340px;
+  padding: clamp(30px, 4vw, 52px);
+  border-radius: 28px;
+  color: #fff;
+  background:
+    radial-gradient(
+      circle at 83% 24%,
+      rgba(255, 64, 100, 0.28),
+      transparent 19rem
+    ),
+    linear-gradient(130deg, #0e0b0c 0%, #2b0d15 57%, #760b23 100%);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 22px 50px rgba(64, 11, 26, 0.18);
+}
+
+.donor-command-card::after {
+  position: absolute;
+  top: -90px;
+  right: -45px;
+  width: 350px;
+  height: 350px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.donor-command-copy {
+  position: relative;
+  z-index: 2;
+  max-width: calc(100% - 205px);
+}
+
+.donor-command-card .donor-kicker {
+  color: #ff9eb0;
+}
+
+.donor-command-card h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  font-weight: 620;
+  letter-spacing: -0.06em;
+  line-height: 1;
+}
+
+.donor-command-card h2 em {
+  display: block;
+  margin-top: 3px;
+  color: #ffacbb;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+.donor-command-copy > p:not(.donor-kicker) {
+  max-width: 600px;
+  margin: 18px 0 24px;
+  color: rgba(255, 255, 255, 0.71);
+  font-size: 0.87rem;
+  line-height: 1.7;
+}
+
+.donor-command-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.donor-command-actions button {
+  min-height: 46px;
+  padding: 0 19px;
+  border: 0;
+  border-radius: 13px;
+  color: var(--donor-black);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.79rem;
+  font-weight: 850;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.donor-command-actions button:hover {
+  transform: translateY(-2px);
+  background: #fff0f3;
+}
+
+.donor-command-actions > span {
+  color: rgba(255, 255, 255, 0.72);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
+}
+
+.donor-blood-visual {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: 5%;
+  width: 175px;
+  height: 175px;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform: translateY(-50%);
+}
+
+.donor-blood-visual > div {
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  color: #8f0c22;
+  background: linear-gradient(145deg, #fff7f8, #f3c8cf);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  box-shadow:
+    0 0 0 10px rgba(255, 255, 255, 0.05),
+    0 18px 40px rgba(21, 0, 5, 0.28);
+}
+
+.donor-blood-visual strong {
+  margin-top: 2px;
+  font-size: 1.55rem;
+}
+
+.donor-blood-visual small {
+  font-size: 0.52rem;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+/* Shared cards */
+
+.donor-readiness-card,
+.donor-panel,
+.donor-stat-grid article,
+.donor-appointment-card {
+  border: 1px solid var(--donor-line);
+  background: #fff;
+  box-shadow: 0 14px 40px rgba(48, 21, 31, 0.055);
+}
+
+.donor-panel {
+  padding: 24px;
+  border-radius: 22px;
+}
+
+.donor-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 19px;
+}
+
+.donor-panel-heading h3 {
+  margin: 0;
+  color: var(--donor-black);
+  font-size: 1.2rem;
+  letter-spacing: -0.025em;
+}
+
+.donor-panel-description {
+  margin: 6px 0 0;
+  color: var(--donor-muted);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.donor-heading-icon {
+  width: 39px;
+  height: 39px;
+  flex: 0 0 39px;
+  border-radius: 12px;
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+  display: grid;
+  place-items: center;
+}
+
+/* Readiness */
+
+.donor-readiness-card {
+  padding: 24px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.donor-progress {
+  width: 122px;
+  height: 122px;
+  margin: 12px auto;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, #fff 57%, transparent 59%),
+    conic-gradient(
+      var(--donor-red) 0 var(--readiness, 50%),
+      #eee5e7 var(--readiness, 50%) 100%
+    );
+  display: grid;
+  place-items: center;
+}
+
+.donor-progress > div {
+  text-align: center;
+}
+
+.donor-progress strong {
+  display: block;
+  color: var(--donor-black);
+  font-size: 1.75rem;
+}
+
+.donor-progress span {
+  color: var(--donor-muted);
+  font-size: 0.54rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.donor-readiness-card > p {
+  margin: 0;
+  color: var(--donor-muted);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.donor-readiness-meta {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee6e8;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+}
+
+.donor-readiness-meta span {
+  color: var(--donor-green);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.66rem;
+  font-weight: 750;
+}
+
+/* Statistics */
+
+.donor-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.donor-stat-grid article {
+  min-height: 112px;
+  padding: 19px;
+  border-radius: 19px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.donor-stat-grid article:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200, 16, 46, 0.23);
+  box-shadow: 0 17px 38px rgba(58, 17, 29, 0.09);
+}
+
+.donor-stat-icon {
+  width: 45px;
+  height: 45px;
+  flex: 0 0 45px;
+  border-radius: 13px;
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+  display: grid;
+  place-items: center;
+}
+
+.donor-stat-icon.gold {
+  color: var(--donor-gold);
+  background: #fff6e4;
+}
+
+.donor-stat-icon.blue {
+  color: var(--donor-blue);
+  background: #edf5ff;
+}
+
+.donor-stat-icon.green {
+  color: var(--donor-green);
+  background: #eaf8f1;
+}
+
+.donor-stat-grid small {
+  color: var(--donor-muted);
+  font-size: 0.61rem;
+  font-weight: 850;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.donor-stat-grid strong {
+  display: block;
+  margin: 2px 0;
+  color: var(--donor-black);
+  font-size: 1.65rem;
+  letter-spacing: -0.04em;
+}
+
+.donor-stat-grid p {
+  margin: 0;
+  color: #978a8f;
+  font-size: 0.66rem;
+}
+
+/* Main content */
+
+.donor-content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(290px, 0.7fr);
+  align-items: start;
+  gap: 20px;
+}
+
+.donor-request-panel {
+  overflow: hidden;
+}
+
+.donor-refresh-small {
+  min-height: 38px;
+  padding: 0 13px;
+  border: 0;
+  border-radius: 999px;
+  color: var(--donor-green);
+  background: #e8f7ef;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+/* Corrected request layout */
+
+.donor-request-layout {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(300px, 0.92fr) minmax(320px, 1.08fr);
+  align-items: stretch;
+  gap: 20px;
+}
+
+.donor-request-list {
+  max-height: 460px;
+  padding-right: 7px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #b9afb2 transparent;
+}
+
+.donor-request-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.donor-request-list::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: #b9afb2;
+}
+
+.donor-request-row {
+  position: relative;
+  width: 100%;
+  min-height: 88px;
+  padding: 14px 42px 14px 14px;
+  border: 1px solid rgba(65, 39, 49, 0.1);
+  border-radius: 15px;
+  color: var(--donor-ink);
+  background: #faf7f8;
+  display: grid;
+  grid-template-columns: 50px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "blood information priority"
+    "blood information priority";
+  align-items: center;
+  column-gap: 13px;
+  text-align: left;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.donor-request-row:hover,
+.donor-request-row.selected {
+  transform: translateX(2px);
+  border-color: rgba(200, 16, 46, 0.32);
+  background: #fff;
+  box-shadow: 0 7px 19px rgba(87, 25, 35, 0.075);
+}
+
+.donor-blood-badge {
+  grid-area: blood;
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  color: #9b6511;
+  background: #fff2dc;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+.donor-blood-badge.critical {
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+}
+
+.donor-request-copy {
+  grid-area: information;
+  overflow: hidden;
+}
+
+.donor-request-copy strong {
+  display: block;
+  overflow: hidden;
+  color: var(--donor-black);
+  font-size: 0.82rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donor-request-copy small {
+  margin-top: 6px;
+  color: var(--donor-muted);
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: 0.64rem;
+  line-height: 1.4;
+}
+
+.donor-request-copy small svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+
+.donor-request-copy small span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.donor-priority {
+  grid-area: priority;
+  max-width: 98px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #a1660b;
+  background: #fff2dd;
+  overflow: hidden;
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.donor-priority.critical {
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+}
+
+.donor-row-arrow {
+  position: absolute;
+  top: 50%;
+  right: 13px;
+  color: #a99b9f;
+  transform: translateY(-50%);
+}
+
+.donor-request-preview {
+  min-height: 100%;
+  padding: 28px;
+  border-radius: 21px;
+  color: #fff;
+  background:
+    radial-gradient(
+      circle at 100% 0,
+      rgba(255, 75, 108, 0.23),
+      transparent 14rem
+    ),
+    linear-gradient(145deg, #1d0d12, #660919);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 17px 38px rgba(43, 7, 17, 0.2);
+}
+
+.donor-selected-label {
+  color: #ffadba;
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.donor-preview-value {
+  margin-top: 17px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.donor-preview-value strong {
+  color: #fff;
+  font-size: 2.7rem;
+  line-height: 1;
+}
+
+.donor-preview-value small {
+  max-width: 130px;
+  color: #e9bec5;
+  font-size: 0.69rem;
+  text-align: right;
+}
+
+.donor-request-preview h4 {
+  margin: 21px 0 7px;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.donor-request-preview > p {
+  margin: 0 0 18px;
+  color: #dec0c5;
+  font-size: 0.73rem;
+  line-height: 1.65;
+}
+
+.donor-route {
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+  color: #ffadba;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.donor-route span {
+  color: #d7aeb5;
+  font-size: 0.63rem;
+}
+
+.donor-route strong {
+  display: block;
+  margin-top: 2px;
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.donor-request-preview > button {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 19px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 13px;
+  color: var(--donor-black);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.79rem;
+  font-weight: 850;
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.donor-request-preview > button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: #fff0f3;
+}
+
+/* Checklist */
+
+.donor-readiness-value {
+  color: var(--donor-black);
+  font-size: 1.1rem;
+}
+
+.donor-checklist-progress {
+  height: 6px;
+  margin-bottom: 17px;
+  border-radius: 999px;
+  background: #eee5e7;
+  overflow: hidden;
+}
+
+.donor-checklist-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8c091e, #dc1737);
+}
+
+.donor-checklist {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.donor-checklist button {
+  width: 100%;
+  padding: 9px 0;
+  border: 0;
+  color: #675a5e;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  text-align: left;
+}
+
+.donor-checklist button > span {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  border: 1px solid #d7c5c9;
+  border-radius: 7px;
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+
+.donor-checklist button > strong {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.donor-checklist button.done {
+  color: #9e8f93;
+}
+
+.donor-checklist button.done > span {
+  border-color: var(--donor-red);
+  background: var(--donor-red);
+}
+
+.donor-checklist button.done > strong {
+  text-decoration: line-through;
+}
+
+/* Other views */
+
+.donor-page-heading {
+  margin-bottom: 23px;
+}
+
+.donor-page-heading h2 {
+  margin: 0;
+  color: var(--donor-black);
+  font-size: clamp(2rem, 3vw, 3.1rem);
+  letter-spacing: -0.055em;
+}
+
+.donor-page-heading > p:last-child {
+  margin: 9px 0 0;
+  color: var(--donor-muted);
+  font-size: 0.87rem;
+}
+
+.donor-table-scroll {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.donor-table {
+  width: 100%;
+  min-width: 720px;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.donor-table th,
+.donor-table td {
+  padding: 15px 13px;
+  border-bottom: 1px solid #eee6e8;
+}
+
+.donor-table th {
+  color: #8c7e83;
+  font-size: 0.61rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.donor-table td {
+  color: #55494d;
+  font-size: 0.75rem;
+}
+
+.donor-history-group,
+.donor-history-status {
+  padding: 6px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.66rem;
+  font-weight: 850;
+}
+
+.donor-history-group {
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+}
+
+.donor-history-status {
+  color: var(--donor-green);
+  background: #eaf8f1;
+}
+
+.donor-appointment-card {
+  padding: 26px;
+  border-radius: 23px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 22px;
+}
+
+.donor-appointment-date {
+  width: 80px;
+  height: 86px;
+  border-radius: 17px;
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+  display: grid;
+  place-items: center;
+  align-content: center;
+}
+
+.donor-appointment-date span,
+.donor-appointment-date small {
+  font-size: 0.53rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.donor-appointment-date strong {
+  font-size: 1.9rem;
+}
+
+.donor-appointment-details h3 {
+  margin: 4px 0 9px;
+}
+
+.donor-appointment-details > p:not(.donor-kicker) {
+  margin: 5px 0;
+  color: var(--donor-muted);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.76rem;
+}
+
+.donor-appointment-card > button {
+  min-height: 43px;
+  padding: 0 16px;
+  border: 1px solid #ddc7cc;
+  border-radius: 999px;
+  color: var(--donor-red);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-weight: 850;
+}
+
+.donor-appointment-card > button.confirmed {
+  border-color: #bde5d4;
+  color: var(--donor-green);
+  background: #eaf8f1;
+}
+
+/* Empty and message states */
+
+.donor-empty {
+  min-height: 230px;
+  padding: 28px;
+  color: var(--donor-muted);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.donor-empty svg {
+  color: var(--donor-green);
+}
+
+.donor-empty strong {
+  margin-top: 10px;
+  color: var(--donor-black);
+}
+
+.donor-empty p {
+  max-width: 410px;
+  margin: 6px 0 0;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.donor-message {
+  position: fixed;
+  z-index: 1000;
+  top: 82px;
+  left: 50%;
+  max-width: calc(100vw - 30px);
+  padding: 12px 16px;
+  border-radius: 999px;
+  color: #fff;
+  background: #181315;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  transform: translateX(-50%);
+}
+
+.donor-message svg {
+  flex: 0 0 auto;
+  color: #70d8a8;
+}
+
+.donor-message span {
+  font-size: 0.76rem;
+}
+
+.donor-message button {
+  margin-left: 5px;
+  border: 0;
+  color: #fff;
+  background: transparent;
+  font-size: 1.1rem;
+}
+
+/* Responsive */
+
+@media (max-width: 1250px) {
+  .donor-hero-grid,
+  .donor-content-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 1050px) {
+  .donor-stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .donor-welcome {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .donor-network-status {
+    width: 100%;
+  }
+
+  .donor-request-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .donor-request-preview {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 700px) {
+  .donor-dashboard-inner {
+    padding: 22px 16px 38px;
+  }
+
+  .donor-command-card {
+    min-height: auto;
+    padding: 30px 22px;
+  }
+
+  .donor-command-copy {
+    max-width: none;
+  }
+
+  .donor-blood-visual {
+    display: none;
+  }
+
+  .donor-appointment-card {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .donor-appointment-card > button {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+
+@media (max-width: 560px) {
+  .donor-stat-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donor-command-card h2 {
+    font-size: 2.3rem;
+  }
+
+  .donor-panel,
+  .donor-readiness-card {
+    padding: 18px;
+  }
+
+  .donor-panel-heading {
+    flex-direction: column;
+  }
+
+  .donor-request-heading {
+    align-items: stretch;
+  }
+
+  .donor-refresh-small {
+    width: 100%;
+  }
+
+  .donor-request-row {
+    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-areas:
+      "blood information"
+      "blood priority";
+    padding: 13px 37px 13px 13px;
+  }
+
+  .donor-blood-badge {
+    width: 46px;
+    height: 46px;
+  }
+
+  .donor-priority {
+    justify-self: start;
+  }
+
+  .donor-readiness-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .donor-preview-value {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .donor-preview-value small {
+    max-width: none;
+    text-align: left;
+  }
+}
+
+/* =========================================================
+   Full-width request section
+   ========================================================= */
+
+.donor-content-grid.donor-content-full {
+  display: block;
+  width: 100%;
+}
+
+.donor-content-full .donor-request-panel {
+  width: 100%;
+}
+
+.donor-content-full .donor-request-layout {
+  grid-template-columns:
+    minmax(340px, 0.9fr)
+    minmax(380px, 1.1fr);
+}
+
+.donor-content-full .donor-request-list {
+  max-height: 500px;
+}
+
+.donor-content-full .donor-request-preview {
+  min-height: 500px;
+}
+
+/* =========================================================
+   Donation checklist side drawer
+   ========================================================= */
+
+.donor-checklist-drawer {
+  position: fixed;
+  z-index: 850;
+  top: 50%;
+  right: 0;
+  width: 390px;
+  height: auto;
+  min-height: 410px;
+  transform: translateY(-50%) translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+/*
+ * The trigger remains visible outside the hidden drawer.
+ * Hovering either the trigger or drawer keeps it open.
+ */
+.donor-checklist-drawer:hover,
+.donor-checklist-drawer:focus-within {
+  transform: translateY(-50%) translateX(0);
+}
+
+.donor-checklist-trigger {
+  position: absolute;
+  top: 50%;
+  left: -58px;
+  width: 58px;
+  min-height: 205px;
+  padding: 16px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 0;
+  border-radius: 18px 0 0 18px;
+  color: #fff;
+  background:
+    linear-gradient(
+      180deg,
+      #de173c 0%,
+      #a80c29 58%,
+      #71091e 100%
+    );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 13px;
+  cursor: pointer;
+  pointer-events: auto;
+  box-shadow:
+    -12px 16px 36px rgba(82, 8, 27, 0.2),
+    inset 1px 0 rgba(255, 255, 255, 0.13);
+}
+
+.donor-checklist-trigger > span {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 0.67rem;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.donor-checklist-trigger > strong {
+  min-width: 38px;
+  padding: 5px 6px;
+  border-radius: 999px;
+  color: #8c0b21;
+  background: #fff;
+  font-size: 0.66rem;
+  text-align: center;
+}
+
+.donor-checklist-trigger svg {
+  flex: 0 0 auto;
+}
+
+.donor-checklist-drawer-panel {
+  width: 100%;
+  min-height: 410px;
+  padding: 27px;
+  border: 1px solid rgba(67, 35, 45, 0.13);
+  border-right: 0;
+  border-radius: 24px 0 0 24px;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: -24px 20px 60px rgba(38, 17, 24, 0.18);
+  backdrop-filter: blur(22px);
+  pointer-events: auto;
+}
+
+.donor-drawer-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 17px;
+  margin-bottom: 20px;
+}
+
+.donor-drawer-heading h3 {
+  margin: 0;
+  color: var(--donor-black);
+  font-size: 1.35rem;
+  letter-spacing: -0.035em;
+}
+
+.donor-drawer-heading > div > p:last-child {
+  max-width: 250px;
+  margin: 7px 0 0;
+  color: var(--donor-muted);
+  font-size: 0.71rem;
+  line-height: 1.55;
+}
+
+.donor-drawer-percentage {
+  flex: 0 0 auto;
+  padding: 8px 10px;
+  border-radius: 11px;
+  color: var(--donor-red);
+  background: var(--donor-red-soft);
+  font-size: 0.87rem;
+}
+
+.donor-checklist-drawer-panel .donor-checklist-progress {
+  height: 7px;
+  margin-bottom: 19px;
+}
+
+.donor-checklist-drawer-panel .donor-checklist {
+  gap: 8px;
+}
+
+.donor-checklist-drawer-panel .donor-checklist button {
+  min-height: 48px;
+  padding: 9px 11px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: #faf7f8;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.donor-checklist-drawer-panel .donor-checklist button:hover {
+  border-color: rgba(200, 16, 46, 0.2);
+  background: #fff;
+}
+
+.donor-checklist-drawer-panel .donor-checklist button.done {
+  background: #fff5f7;
+}
+
+.donor-checklist-drawer-panel .donor-checklist button > strong {
+  font-size: 0.76rem;
+}
+
+.donor-drawer-footer {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 14px;
+  color: #116c4d;
+  background: #eaf8f2;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.donor-drawer-footer > svg {
+  flex: 0 0 auto;
+}
+
+.donor-drawer-footer strong,
+.donor-drawer-footer span {
+  display: block;
+}
+
+.donor-drawer-footer strong {
+  font-size: 0.72rem;
+}
+
+.donor-drawer-footer span {
+  margin-top: 3px;
+  color: #5a7e70;
+  font-size: 0.65rem;
+}
+
+/* Keep drawer stable—no blinking or automatic animation */
+
+.donor-checklist-drawer *,
+.donor-checklist-drawer *::before,
+.donor-checklist-drawer *::after {
+  animation: none !important;
+}
+
+/* Tablet */
+
+@media (max-width: 1100px) {
+  .donor-content-full .donor-request-layout {
+    grid-template-columns: minmax(280px, 0.9fr) minmax(310px, 1.1fr);
+  }
+
+  .donor-checklist-drawer {
+    width: 350px;
+  }
+}
+
+/* Mobile: use a bottom drawer instead of covering the screen */
+
+@media (max-width: 700px) {
+  .donor-content-full .donor-request-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .donor-content-full .donor-request-preview {
+    min-height: 340px;
+  }
+
+  .donor-checklist-drawer {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 0;
+    transform: translateY(calc(100% - 58px));
+  }
+
+  .donor-checklist-drawer:hover,
+  .donor-checklist-drawer:focus-within {
+    transform: translateY(0);
+  }
+
+  .donor-checklist-trigger {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    min-height: 58px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 17px 17px 0 0;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .donor-checklist-trigger > span {
+    writing-mode: initial;
+    transform: none;
+  }
+
+  .donor-checklist-trigger > strong {
+    margin-left: auto;
+  }
+
+  .donor-checklist-drawer-panel {
+    min-height: 0;
+    max-height: calc(100vh - 120px);
+    padding: 22px 18px;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+}

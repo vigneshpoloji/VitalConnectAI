@@ -1,0 +1,63 @@
+/* ==========================================================================
+   VITALCONNECTAI — SOVEREIGN LUXURY ATELIER THEME
+   Scoped strictly to .luxury-dashboard-root to keep landing page pristine.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+.luxury-dashboard-root {
+  --lux-void: #030508;
+  --lux-obsidian-0: #06090F;
+  --lux-obsidian-1: #0B101B;
+  --lux-obsidian-2: #101726;
+  --lux-obsidian-3: #162033;
+  
+  /* Metallic Accents */
+  --lux-gold-400: #E5C268;
+  --lux-gold-500: #D4AF37;
+  --lux-gold-600: #AA820A;
+  --lux-gold-glow: rgba(212, 175, 55, 0.22);
+
+  /* Vital Sign Colors */
+  --lux-ruby-400: #FB7185;
+  --lux-ruby-500: #E11D48;
+  --lux-ruby-600: #9F1239;
+  --lux-ruby-glow: rgba(225, 29, 72, 0.25);
+
+  --lux-cryo-400: #38BDF8;
+  --lux-cryo-500: #0EA5E9;
+  --lux-cryo-glow: rgba(14, 165, 233, 0.22);
+
+  --lux-emerald: #10B981;
+  --lux-emerald-glow: rgba(16, 185, 129, 0.2);
+
+  /* Borders & Highlights */
+  --lux-border-faint: rgba(255, 255, 255, 0.05);
+  --lux-border-glass: rgba(255, 255, 255, 0.1);
+  --lux-border-gold: rgba(212, 175, 55, 0.35);
+
+  /* Typography */
+  --font-serif: 'Cinzel', serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Shadows */
+  --lux-shadow-ambient: 0 30px 90px -20px rgba(0, 0, 0, 0.85);
+  --lux-shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+  font-family: var(--font-sans);
+  background-color: var(--lux-void);
+  color: #F8FAFC;
+}
+
+/* Background Atmosphere */
+.luxury-dashboard-root::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(225, 29, 72, 0.12), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 100% 50%, rgba(212, 175, 55, 0.06), transparent 60%),
+    radial-gradient(ellipse 40% 40% at 0% 100%, rgba(14, 165, 233, 0.05), transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
