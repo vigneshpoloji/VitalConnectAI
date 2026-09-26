@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import {
   Activity,
   Award,
@@ -453,7 +452,11 @@ export default function DonorDashboard({ user, onBack }) {
   const initialTime = useMemo(() => getISTGreetingData(), []);
   const greeting = initialTime.greeting;
 
-  const [searchParams] = useSearchParams();
+  // Safe native browser query param inspection (works with or without router context)
+  const searchParams =
+    typeof window !== "undefined"
+      ? new URLSearchParams(window.location.search)
+      : new URLSearchParams();
   const targetRequestId = searchParams.get("request");
 
   const [requests, setRequests] = useState([]);

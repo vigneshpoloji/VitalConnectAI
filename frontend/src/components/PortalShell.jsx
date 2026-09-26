@@ -214,7 +214,7 @@ export default function PortalShell({
     [navigation, activeTab]
   );
 
-  // Live notification polling
+  // Controlled notification polling (30-second interval)
   const fetchLiveNotifications = useCallback(async () => {
     try {
       const userDistrict = user?.district || "Kamareddy";
@@ -249,7 +249,7 @@ export default function PortalShell({
 
   useEffect(() => {
     fetchLiveNotifications();
-    const interval = window.setInterval(fetchLiveNotifications, 5000);
+    const interval = window.setInterval(fetchLiveNotifications, 30000);
     return () => window.clearInterval(interval);
   }, [fetchLiveNotifications]);
 
@@ -269,7 +269,7 @@ export default function PortalShell({
     }
   }, [activeTab, unreadAlerts, roleKey, user?.district]);
 
-  // Real-time suspension eviction heartbeat (checks every 3 seconds)
+  // Real-time suspension eviction heartbeat (relaxed to 45 seconds to prevent spam)
   useEffect(() => {
     let isChecking = false;
 
@@ -315,7 +315,7 @@ export default function PortalShell({
     };
 
     runStatusCheck();
-    const interval = window.setInterval(runStatusCheck, 3000);
+    const interval = window.setInterval(runStatusCheck, 45000);
 
     return () => window.clearInterval(interval);
   }, [onBack]);

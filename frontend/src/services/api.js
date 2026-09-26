@@ -1,14 +1,14 @@
 import { forceLogoutSuspended } from '../utils/sessionGuard';
 
-// Enforce fallback to local backend if VITE_API_URL is missing or contains placeholder values
-const RAW_URL =
+// Resolve API base URL dynamically from environment variable with fallback
+export const API_BASE_URL = (
   import.meta.env.VITE_API_URL &&
   !import.meta.env.VITE_API_URL.includes('your-backend-api-service') &&
   !import.meta.env.VITE_API_URL.includes('placeholder')
     ? import.meta.env.VITE_API_URL
-    : 'http://localhost:5000';
+    : 'http://localhost:5000'
+).replace(/\/+$/, '');
 
-export const API_BASE_URL = RAW_URL.replace(/\/+$/, '');
 const API_ROOT = `${API_BASE_URL}/api`;
 
 /**
@@ -55,7 +55,6 @@ const request = async (endpoint, options = {}) => {
 
   const data = await response.json().catch(() => ({}));
 
-  // Interceptor: Catch suspension 403 responses
   if (response.status === 403) {
     const msg = data.message || '';
     const lowerMsg = msg.toLowerCase();

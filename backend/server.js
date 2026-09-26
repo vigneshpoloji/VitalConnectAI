@@ -79,22 +79,41 @@ app.get('/health', handleHealthCheck);
 app.get('/api/health', handleHealthCheck);
 
 // ============================================================================
-// 5. Rate Limiters (Global & Strict Emergency Tiers)
+// 5. Rate Limiters (Relaxed for Local Dev & High Traffic)
 // ============================================================================
 const generalLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 200,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 1000, // Raised to accommodate multi-tab polling and live queues
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => {
+    return (
+      process.env.NODE_ENV !== 'production' ||
+      req.ip === '127.0.0.1' ||
+      req.ip === '::1' ||
+      req.ip === '::ffff:127.0.0.1' ||
+      req.hostname === 'localhost'
+    );
+  },
   message: { success: false, message: 'Too many requests. Please slow down.' },
 });
+
 app.use('/api', generalLimiter);
 
 const emergencyActionLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 15,
+  max: 30, // Increased threshold for dispatch events
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => {
+    return (
+      process.env.NODE_ENV !== 'production' ||
+      req.ip === '127.0.0.1' ||
+      req.ip === '::1' ||
+      req.ip === '::ffff:127.0.0.1' ||
+      req.hostname === 'localhost'
+    );
+  },
   message: {
     success: false,
     message:
