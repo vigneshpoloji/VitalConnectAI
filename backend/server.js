@@ -39,26 +39,38 @@ app.use(
 app.use(compression());
 
 // ============================================================================
-// 3. Strict CORS Whitelist
+// 3. Permissive Origin Validator & Dynamic Vercel Matching
 // ============================================================================
 const allowedOrigins = [
+  'https://vital-connect-ai.vercel.app',
+  'https://vitalconnect-ai.vercel.app',
   'http://localhost:5173',
   'http://127.0.0.1:5173',
+  'http://localhost:5000',
+  'http://localhost:3000',
   process.env.FRONTEND_PROD_URL,
 ].filter(Boolean);
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error('Blocked by CORS policy.'));
-      }
-    },
-    credentials: true,
-  })
-);
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (e.g. mobile apps, curl, or server-to-server)
+    if (!origin) return callback(null, true);
+
+    if (
+      allowedOrigins.includes(origin) ||
+      origin.endsWith('.vercel.app') // Dynamically accepts all Vercel branch/preview deployments
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+};
+
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Handle preflight requests
 
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
@@ -268,11 +280,17 @@ app.get('/api/bloodbanks/me', async (req, res) => {
 });
 
 // ============================================================================
-// 8. Attach Socket.io to the HTTP Server Instance
+// 8. Attach Socket.io to the HTTP Server Instance with Shared CORS Rules
 // ============================================================================
 const io = new Server(server, {
   cors: {
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+        callback(null, true);
+      } else {
+        callback(new Error('Socket CORS error'));
+      }
+    },
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     credentials: true,
   },
