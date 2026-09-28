@@ -26,6 +26,7 @@ import {
 
 import PortalShell from "../../components/PortalShell";
 import { getISTGreetingData } from "../../utils/istTime";
+import { API_BASE_URL } from "../../config";
 import "./AdminDashboard.css";
 
 const INITIAL_ACCOUNTS = [
@@ -142,7 +143,7 @@ export default function AdminDashboard({ user, onBack }) {
   const fetchAccounts = useCallback(async () => {
     try {
       const token = localStorage.getItem("vital_token");
-      const res = await fetch("http://localhost:5000/api/admin/users", {
+      const res = await fetch(`${API_BASE_URL}/api/admin/users`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
@@ -194,7 +195,7 @@ export default function AdminDashboard({ user, onBack }) {
   const fetchPendingCamps = useCallback(async () => {
     try {
       const token = localStorage.getItem("vital_token");
-      const res = await fetch("http://localhost:5000/api/admin/camps/pending", {
+      const res = await fetch(`${API_BASE_URL}/api/admin/camps/pending`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
       const data = await res.json();
@@ -211,8 +212,8 @@ export default function AdminDashboard({ user, onBack }) {
       const token = localStorage.getItem("vital_token");
       const url =
         severityFilter === "all"
-          ? "http://localhost:5000/api/audit?limit=30"
-          : `http://localhost:5000/api/audit?severity=${severityFilter}&limit=30`;
+          ? `${API_BASE_URL}/api/audit?limit=30`
+          : `${API_BASE_URL}/api/audit?severity=${severityFilter}&limit=30`;
 
       const res = await fetch(url, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
@@ -223,7 +224,6 @@ export default function AdminDashboard({ user, onBack }) {
         setAuditLogs(data.logs);
         if (data.stats) setAuditStats(data.stats);
 
-        // Synchronize top items with the overview sidebar
         const formattedLogs = data.logs.slice(0, 8).map((log) => ({
           id: log._id || `${Date.now()}-${Math.random()}`,
           title: log.action || "System Event",
@@ -260,7 +260,7 @@ export default function AdminDashboard({ user, onBack }) {
   const updateCampStatus = async (campId, status) => {
     try {
       const token = localStorage.getItem("vital_token");
-      const res = await fetch(`http://localhost:5000/api/admin/camps/${campId}/status`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/camps/${campId}/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -342,7 +342,7 @@ export default function AdminDashboard({ user, onBack }) {
 
     try {
       const token = localStorage.getItem("vital_token");
-      await fetch(`http://localhost:5000/api/admin/users/${accountId}/status`, {
+      await fetch(`${API_BASE_URL}/api/admin/users/${accountId}/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

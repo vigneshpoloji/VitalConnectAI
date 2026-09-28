@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import VitalAIAssistant from "../../components/VitalAIAssistant";
 import { apiService } from "../../services/api";
+import { API_BASE_URL } from "../../config";
 import "./BloodCampsPage.css";
 
 export default function BloodCampsPage({ onBack }) {
@@ -51,7 +52,6 @@ export default function BloodCampsPage({ onBack }) {
     setTimeout(() => setToastMsg(""), 3000);
   };
 
-  // Fetch only Admin-sanctioned / Medically Verified camps
   const loadPublishedCamps = useCallback(async () => {
     setLoading(true);
     try {
@@ -59,7 +59,6 @@ export default function BloodCampsPage({ onBack }) {
       const campsData = data?.camps || data?.data || [];
 
       if (data?.success && Array.isArray(campsData)) {
-        // Exclusively display clinically accredited drives
         const sanctionedOnly = campsData.filter(
           (c) =>
             c.status === "Medically Verified" ||
@@ -120,7 +119,6 @@ export default function BloodCampsPage({ onBack }) {
     loadPublishedCamps();
   }, [loadPublishedCamps]);
 
-  // Handle detailed slot reservation submission
   const handleBookSlot = async (e) => {
     e.preventDefault();
     if (!selectedCampForBooking) return;
@@ -128,7 +126,7 @@ export default function BloodCampsPage({ onBack }) {
     setIsSubmittingBooking(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/camps/${selectedCampForBooking._id}/book-slot`,
+        `${API_BASE_URL}/api/camps/${selectedCampForBooking._id}/book-slot`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -163,7 +161,6 @@ export default function BloodCampsPage({ onBack }) {
     }
   };
 
-  // Submit camp proposal for Admin Accreditation
   const handleCampSubmit = async (e) => {
     e.preventDefault();
     setIsSubmittingHost(true);
@@ -235,7 +232,6 @@ export default function BloodCampsPage({ onBack }) {
         }}
       />
 
-      {/* Navigation Header */}
       <div className="shell camps-nav-bar">
         <button type="button" className="camps-back-btn" onClick={onBack}>
           <ArrowLeft size={16} />
@@ -261,7 +257,6 @@ export default function BloodCampsPage({ onBack }) {
         </button>
       </div>
 
-      {/* Hero Header */}
       <section className="shell camps-hero">
         <span className="camps-kicker">
           <ShieldCheck size={13} /> Certified Regional Blood Camps
@@ -279,7 +274,6 @@ export default function BloodCampsPage({ onBack }) {
           for clinical review.
         </p>
 
-        {/* Search & Accreditations Panel */}
         <div className="camps-search-panel">
           <div className="search-field">
             <Search size={18} />
@@ -302,7 +296,6 @@ export default function BloodCampsPage({ onBack }) {
         </div>
       </section>
 
-      {/* Verified Camps Grid */}
       <section className="shell camps-showcase">
         <div className="section-title-row">
           <div>
@@ -433,7 +426,6 @@ export default function BloodCampsPage({ onBack }) {
         )}
       </section>
 
-      {/* Reserve Slot Modal */}
       {selectedCampForBooking && (
         <div
           className="camp-modal-overlay"
@@ -566,7 +558,6 @@ export default function BloodCampsPage({ onBack }) {
         </div>
       )}
 
-      {/* Host a Camp Modal */}
       {showHostModal && (
         <div className="camp-modal-overlay" onClick={() => setShowHostModal(false)}>
           <div className="camp-modal-window" onClick={(e) => e.stopPropagation()}>
@@ -698,7 +689,6 @@ export default function BloodCampsPage({ onBack }) {
         </div>
       )}
 
-      {/* Toast Notification */}
       {toastMsg && (
         <div className="camps-toast">
           <CheckCircle2 size={18} />

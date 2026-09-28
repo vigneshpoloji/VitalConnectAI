@@ -1,3 +1,5 @@
+import { API_BASE_URL } from '../config';
+
 /**
  * Triggers clean eviction across local storage and redirects immediately
  */
@@ -17,7 +19,7 @@ export const checkSessionStatus = async () => {
   if (!token) return;
 
   try {
-    const res = await fetch('http://localhost:5000/api/auth/verify-status', {
+    const res = await fetch(`${API_BASE_URL}/api/auth/verify-status`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

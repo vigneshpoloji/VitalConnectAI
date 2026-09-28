@@ -36,6 +36,7 @@ import FeedbackPage from './pages/feedback/FeedbackPage'
 import InstallAppBanner from './components/InstallAppBanner'
 import { apiService } from './services/api'
 import { socket } from './services/socket'
+import { API_BASE_URL } from './config'
 
 function useNotifications(user, pollInterval = 12000) {
   const [notifications, setNotifications] = useState([])
@@ -49,7 +50,7 @@ function useNotifications(user, pollInterval = 12000) {
       const role = user.role?.toLowerCase() || 'donor'
 
       const res = await fetch(
-        `http://localhost:5000/api/notifications?district=${encodeURIComponent(
+        `${API_BASE_URL}/api/notifications?district=${encodeURIComponent(
           district
         )}&role=${encodeURIComponent(role)}`,
         {
@@ -208,7 +209,6 @@ export default function App() {
   const [botOpen, setBotOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState(null)
 
-  // Load user session
   const [currentUser, setCurrentUser] = useState(() => {
     try {
       const saved = localStorage.getItem('vital_user')
@@ -218,13 +218,11 @@ export default function App() {
     }
   })
 
-  // Notifications State & Dropdown
   const { notifications = [], unreadCount = 0, markAllAsRead } = useNotifications
     ? useNotifications(currentUser)
     : { notifications: [], unreadCount: 0, markAllAsRead: () => {} }
   const [showNotifDropdown, setShowNotifDropdown] = useState(false)
 
-  // Prevent landing page from loading if user is already logged in
   const [path, setPath] = useState(() => {
     const current = window.location.pathname
     try {
@@ -241,29 +239,24 @@ export default function App() {
 
   const [intendedRole, setIntendedRole] = useState(null)
 
-  // Find Blood state variables
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('O+')
   const [locationText, setLocationText] = useState('Use my location')
   const [userCoords, setUserCoords] = useState(null)
   const [isDetectingLocation, setIsDetectingLocation] = useState(false)
 
-  // Location Autocomplete State
   const [locationSuggestions, setLocationSuggestions] = useState([])
   const [showSuggestions, setShowSuggestions] = useState(false)
 
-  // Public Live Blood Search Modal States
   const [searchResults, setSearchResults] = useState(null)
   const [isSearching, setIsSearching] = useState(false)
   const [showSearchModal, setShowSearchModal] = useState(false)
 
-  // Donor Live District Emergency Feed States
   const [selectedDistrict, setSelectedDistrict] = useState(
     currentUser?.district || 'Kamareddy'
   )
   const [donorRequests, setDonorRequests] = useState([])
   const [isLoadingRequests, setIsLoadingRequests] = useState(false)
 
-  // Hospital Emergency Requirement Form States
   const [hospitalBloodGroup, setHospitalBloodGroup] = useState('O+')
   const [unitsNeeded, setUnitsNeeded] = useState(2)
   const [urgency, setUrgency] = useState('Critical Trauma')
@@ -271,11 +264,9 @@ export default function App() {
   const [isSubmittingReq, setIsSubmittingReq] = useState(false)
   const [showHospitalQuickReq, setShowHospitalQuickReq] = useState(false)
 
-  // Admin Camp Accreditation Queue States
   const [adminCampQueue, setAdminCampQueue] = useState([])
   const [isQueueLoading, setIsQueueLoading] = useState(false)
 
-  // Landing Page Chatbot State
   const [landingBotInput, setLandingBotInput] = useState('')
   const [isLandingBotThinking, setIsLandingBotThinking] = useState(false)
   const [landingBotMessages, setLandingBotMessages] = useState([
@@ -294,7 +285,7 @@ export default function App() {
       const rawLocation = locationText === 'Use my location' ? '' : locationText
       const cleanLoc = rawLocation.replace(/\(.*?\)/g, '').trim()
 
-      let url = `http://localhost:5000/api/bloodbanks/public-search?bloodGroup=${encodeURIComponent(
+      let url = `${API_BASE_URL}/api/bloodbanks/public-search?bloodGroup=${encodeURIComponent(
         selectedBloodGroup
       )}&location=${encodeURIComponent(cleanLoc)}`
 
@@ -336,7 +327,6 @@ export default function App() {
     }
   }, [currentUser?.bloodGroup, selectedDistrict])
 
-  // Real-Time Socket.io District Subscription & Event Routing
   useEffect(() => {
     const activeDistrict = (selectedDistrict || currentUser?.district || 'Kamareddy').trim()
     socket.emit('join_district', activeDistrict)
@@ -362,7 +352,6 @@ export default function App() {
     }
   }, [selectedDistrict, currentUser, showSearchModal, fetchDonorEmergencyFeed, handlePublicSearch])
 
-  // Synchronize location changes to selectedDistrict
   useEffect(() => {
     if (
       locationText &&
@@ -377,7 +366,6 @@ export default function App() {
     }
   }, [locationText])
 
-  // Auto-scroll chat feed to newest message
   useEffect(() => {
     if (botOpen && botBodyRef.current) {
       botBodyRef.current.scrollTo({
@@ -400,7 +388,7 @@ export default function App() {
     setIsLandingBotThinking(true)
 
     try {
-      const res = await fetch('http://localhost:5000/api/ai/query', {
+      const res = await fetch(`${API_BASE_URL}/api/ai/query`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -429,7 +417,7 @@ export default function App() {
           id: `${Date.now()}-bot`,
           sender: 'bot',
           text:
-            '* Unable to connect to the backend server.\n* Please verify that the backend is running on http://localhost:5000.\n\n**Suggestions:**\n* Check your connection\n* Try again in a moment',
+            '* Unable to connect to the backend server.\n* Please check your network connection.\n\n**Suggestions:**\n* Check your connection\n* Try again in a moment',
         },
       ])
     } finally {
@@ -444,7 +432,7 @@ export default function App() {
     if (val.trim().length >= 1 && val !== 'Use my location') {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/bloodbanks/locations?q=${encodeURIComponent(val.trim())}`
+          `${API_BASE_URL}/api/bloodbanks/locations?q=${encodeURIComponent(val.trim())}`
         )
         const data = await res.json()
         if (data.success && data.suggestions.length > 0) {
@@ -557,7 +545,7 @@ export default function App() {
 
     setIsQueueLoading(true)
     try {
-      const res = await fetch('http://localhost:5000/api/admin/camps/pending', {
+      const res = await fetch(`${API_BASE_URL}/api/admin/camps/pending`, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -604,7 +592,7 @@ export default function App() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/api/admin/camps/${campId}/status`, {
+      const res = await fetch(`${API_BASE_URL}/api/admin/camps/${campId}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -626,7 +614,7 @@ export default function App() {
   }
 
   const handleActivateRequest = async (e) => {
-    if (e) e.preventDefault()
+    e.preventDefault()
 
     const token = localStorage.getItem('vital_token')
     const user = JSON.parse(localStorage.getItem('vital_user') || '{}')
@@ -648,7 +636,7 @@ export default function App() {
         district: user.district || 'Kamareddy',
       }
 
-      const response = await fetch('http://localhost:5000/api/blood-requests/create', {
+      const response = await fetch(`${API_BASE_URL}/api/blood-requests/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1549,7 +1537,6 @@ export default function App() {
         <div className="ambient ambient-one" />
         <div className="ambient ambient-two" />
 
-        {/* PWA / Web APK Installation Prompt */}
         <InstallAppBanner />
 
         <nav className="nav shell">

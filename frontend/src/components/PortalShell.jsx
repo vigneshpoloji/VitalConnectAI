@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 
 import VitalAIAssistant from "./VitalAIAssistant";
+import { API_BASE_URL } from "../config";
 import "./portal-views.css";
 
 const ROLE_NAVIGATIONS = {
@@ -219,7 +220,7 @@ export default function PortalShell({
     try {
       const userDistrict = user?.district || "Kamareddy";
       const res = await fetch(
-        `http://localhost:5000/api/notifications?role=${roleKey}&district=${encodeURIComponent(
+        `${API_BASE_URL}/api/notifications?role=${roleKey}&district=${encodeURIComponent(
           userDistrict
         )}`
       );
@@ -256,7 +257,7 @@ export default function PortalShell({
   // Mark notifications as read when the user views the Alerts tab
   useEffect(() => {
     if (activeTab === "alerts" && unreadAlerts > 0) {
-      fetch("http://localhost:5000/api/notifications/mark-read", {
+      fetch(`${API_BASE_URL}/api/notifications/mark-read`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -279,12 +280,12 @@ export default function PortalShell({
 
       isChecking = true;
       try {
-        let response = await fetch("http://localhost:5000/api/auth/verify-status", {
+        let response = await fetch(`${API_BASE_URL}/api/auth/verify-status`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
         if (response.status === 404) {
-          response = await fetch("http://localhost:5000/api/login/verify-status", {
+          response = await fetch(`${API_BASE_URL}/api/login/verify-status`, {
             headers: { Authorization: `Bearer ${token}` },
           });
         }

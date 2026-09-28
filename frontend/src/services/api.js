@@ -1,11 +1,7 @@
+import { API_BASE_URL, API_ROOT } from '../config';
 import { forceLogoutSuspended } from '../utils/sessionGuard';
 
-// Resolve API base URL dynamically from environment variable with fallback
-export const API_BASE_URL = (
-  import.meta.env.VITE_API_URL || 'https://vitalconnect-api.onrender.com'
-).replace(/\/+$/, '');
-
-const API_ROOT = `${API_BASE_URL}/api`;
+export { API_BASE_URL };
 
 /**
  * Standard fetch utility that automatically injects JWT authorization
