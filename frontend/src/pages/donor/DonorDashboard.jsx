@@ -27,8 +27,9 @@ import {
 import PortalShell from "../../components/PortalShell";
 import { getISTGreetingData } from "../../utils/istTime";
 import { apiService } from "../../services/api";
-import { API_BASE_URL } from "../../config";
 import "./DonorDashboard.css";
+
+const API_BASE = import.meta.env.VITE_API_URL || 'https://vitalconnect-api.onrender.com';
 
 function urlBase64ToUint8Array(base64String) {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -162,7 +163,7 @@ export function PushNotificationBanner({ user }) {
       }
 
       const reg = await navigator.serviceWorker.ready;
-      const keyRes = await fetch(`${API_BASE_URL}/api/push/vapid-key`);
+      const keyRes = await fetch(`${API_BASE}/api/push/vapid-key`);
       const { publicKey } = await keyRes.json();
 
       const subscription = await reg.pushManager.subscribe({
@@ -170,7 +171,7 @@ export function PushNotificationBanner({ user }) {
         applicationServerKey: urlBase64ToUint8Array(publicKey),
       });
 
-      await fetch(`${API_BASE_URL}/api/push/subscribe`, {
+      await fetch(`${API_BASE}/api/push/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -256,7 +257,7 @@ export function EmergencyAlertCard({ alert: item, currentUser, onResponseSuccess
     try {
       const token = localStorage.getItem("vital_token");
       const res = await fetch(
-        `${API_BASE_URL}/api/blood-requests/${cardId}/respond`,
+        `${API_BASE}/api/blood-requests/${cardId}/respond`,
         {
           method: "POST",
           headers: {
@@ -475,7 +476,7 @@ export default function DonorDashboard({ user, onBack }) {
       try {
         const token = localStorage.getItem("vital_token");
 
-        const response = await fetch(`${API_BASE_URL}/api/requests`, {
+        const response = await fetch(`${API_BASE}/api/requests`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
 
@@ -542,7 +543,7 @@ export default function DonorDashboard({ user, onBack }) {
     try {
       const district = currentDonor.district || "Kamareddy";
       const res = await fetch(
-        `${API_BASE_URL}/api/camps?district=${district}&status=Medically Verified`
+        `${API_BASE}/api/camps?district=${district}&status=Medically Verified`
       );
       const data = await res.json();
       if (data.success && Array.isArray(data.camps)) {
