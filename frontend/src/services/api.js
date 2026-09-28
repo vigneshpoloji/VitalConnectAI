@@ -2,11 +2,7 @@ import { forceLogoutSuspended } from '../utils/sessionGuard';
 
 // Resolve API base URL dynamically from environment variable with fallback
 export const API_BASE_URL = (
-  import.meta.env.VITE_API_URL &&
-  !import.meta.env.VITE_API_URL.includes('your-backend-api-service') &&
-  !import.meta.env.VITE_API_URL.includes('placeholder')
-    ? import.meta.env.VITE_API_URL
-    : 'http://localhost:5000'
+  import.meta.env.VITE_API_URL || 'https://vitalconnect-api.onrender.com'
 ).replace(/\/+$/, '');
 
 const API_ROOT = `${API_BASE_URL}/api`;

@@ -78,6 +78,15 @@ const handleHealthCheck = (req, res) => {
 app.get('/health', handleHealthCheck);
 app.get('/api/health', handleHealthCheck);
 
+// Root operational health check endpoint
+app.get('/', (req, res) => {
+  res.json({
+    status: 'online',
+    message: 'VitalConnectAI Backend API is operational',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 // ============================================================================
 // 5. Rate Limiters (Relaxed for Local Dev & High Traffic)
 // ============================================================================

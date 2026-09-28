@@ -18,7 +18,7 @@ import {
   X,
 } from "lucide-react";
 import DigitPinInput from "../components/DigitPinInput";
-import { apiService } from "../services/api";
+import { apiService, API_BASE_URL } from "../services/api";
 
 export default function AuthPage({
   initialMode = "login",
@@ -165,7 +165,6 @@ export default function AuthPage({
   useEffect(() => {
     if (selectedRole !== "Donor" || !window.google?.accounts?.id) return;
 
-    // Initialize only once per browser session
     if (!window.__googleAuthInitialized) {
       window.google.accounts.id.initialize({
         client_id:
@@ -206,7 +205,6 @@ export default function AuthPage({
       window.__googleAuthInitialized = true;
     }
 
-    // Re-render button DOM target based on active mode
     const btnContainerId =
       mode === "login" ? "googleDonorBtnLogin" : "googleDonorBtnRegister";
     const targetElement = document.getElementById(btnContainerId);
@@ -235,7 +233,7 @@ export default function AuthPage({
     setSuccessMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/donor/otp/send", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/donor/otp/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: identifier }),
@@ -267,7 +265,7 @@ export default function AuthPage({
     setErrorMessage("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/donor/otp/verify", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/donor/otp/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone: identifier, otp: phoneOtp }),
@@ -299,7 +297,7 @@ export default function AuthPage({
     setForgotSuccess("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ identifier: forgotIdentifier.trim() }),
@@ -326,7 +324,7 @@ export default function AuthPage({
     setForgotError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/reset-password", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -868,7 +866,6 @@ export default function AuthPage({
                 )}
               </>
             ) : (
-              /* Standard Credentials Flow */
               <>
                 <label>
                   <IdentityIcon size={17} />
