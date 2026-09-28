@@ -39,7 +39,7 @@ app.use(
 app.use(compression());
 
 // ============================================================================
-// 3. Permissive Origin Validator & Dynamic Vercel Matching
+// 3. Permissive Origin Validator & Express 5-Compatible CORS
 // ============================================================================
 const allowedOrigins = [
   'https://vital-connect-ai.vercel.app',
@@ -53,12 +53,10 @@ const allowedOrigins = [
 
 const corsOptions = {
   origin: function (origin, callback) {
-    // Allow requests with no origin (e.g. mobile apps, curl, or server-to-server)
     if (!origin) return callback(null, true);
-
     if (
       allowedOrigins.includes(origin) ||
-      origin.endsWith('.vercel.app') // Dynamically accepts all Vercel branch/preview deployments
+      origin.endsWith('.vercel.app')
     ) {
       return callback(null, true);
     }
@@ -69,8 +67,8 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
 };
 
+// Handles both regular and preflight OPTIONS requests across all routes
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Handle preflight requests
 
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true, limit: '1mb' }));
@@ -104,7 +102,7 @@ app.get('/', (req, res) => {
 // ============================================================================
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 1000, // Raised to accommodate multi-tab polling and live queues
+  max: 1000,
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => {
@@ -123,7 +121,7 @@ app.use('/api', generalLimiter);
 
 const emergencyActionLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 30, // Increased threshold for dispatch events
+  max: 30,
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => {
