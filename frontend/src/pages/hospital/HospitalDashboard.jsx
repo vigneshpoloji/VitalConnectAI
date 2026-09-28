@@ -29,6 +29,7 @@ import PortalShell from "../../components/PortalShell";
 import { apiService } from "../../services/api";
 import { getISTGreetingData } from "../../utils/istTime";
 import { generateWhatsAppBroadcastUrl } from "../../utils/whatsappBroadcast";
+import { API_BASE_URL } from "../../config";
 import "./HospitalDashboard.css";
 
 const BLOOD_GROUPS = ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"];
@@ -214,7 +215,7 @@ export function CrossMatchVerificationModal({ request, onClose, onVerified }) {
     setSubmitting(true);
     try {
       const res = await fetch(
-        `http://localhost:5000/api/blood-requests/${request._id || request.id}/verify-transfusion`,
+        `${API_BASE_URL}/api/blood-requests/${request._id || request.id}/verify-transfusion`,
         {
           method: "POST",
           headers: {
@@ -545,7 +546,7 @@ export default function HospitalDashboard({ user, onBack }) {
   const fetchHospitalRequests = useCallback(async () => {
     try {
       const token = localStorage.getItem("vital_token");
-      const response = await fetch("http://localhost:5000/api/requests", {
+      const response = await fetch(`${API_BASE_URL}/api/requests`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
@@ -569,7 +570,7 @@ export default function HospitalDashboard({ user, onBack }) {
     try {
       const token = localStorage.getItem("vital_token");
       const res = await fetch(
-        `http://localhost:5000/api/blood-requests/${requestId}/progress-status`,
+        `${API_BASE_URL}/api/blood-requests/${requestId}/progress-status`,
         {
           method: "PATCH",
           headers: {
@@ -593,7 +594,7 @@ export default function HospitalDashboard({ user, onBack }) {
   const fetchRegionalBanks = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/bloodbanks/inventory?district=${userDistrict}`
+        `${API_BASE_URL}/api/bloodbanks/inventory?district=${userDistrict}`
       );
       if (!response.ok) return;
 
@@ -615,7 +616,7 @@ export default function HospitalDashboard({ user, onBack }) {
     try {
       const token = localStorage.getItem("vital_token");
       const response = await fetch(
-        `http://localhost:5000/api/donors?district=${userDistrict}`,
+        `${API_BASE_URL}/api/donors?district=${userDistrict}`,
         {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         }
@@ -1000,7 +1001,6 @@ export default function HospitalDashboard({ user, onBack }) {
 
                             <EmergencyAIAssistant currentBloodGroup={bloodGroupDisplay} />
 
-                            {/* WhatsApp Emergency Share Link */}
                             <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
                               <a
                                 href={generateWhatsAppBroadcastUrl({
@@ -1233,7 +1233,6 @@ export default function HospitalDashboard({ user, onBack }) {
 
                             <EmergencyAIAssistant currentBloodGroup={request.bloodGroup || "AB-"} />
 
-                            {/* WhatsApp Emergency Share Link */}
                             <div style={{ display: "flex", gap: "8px", marginTop: "10px" }}>
                               <a
                                 href={generateWhatsAppBroadcastUrl({

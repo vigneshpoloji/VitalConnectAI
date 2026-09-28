@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 
+import { API_BASE_URL } from "../config";
 import "./VitalAIAssistant.css";
 
 export default function VitalAIAssistant({
@@ -32,9 +33,6 @@ export default function VitalAIAssistant({
     },
   ]);
 
-  /*
-   * Automatically scroll to show the newest message.
-   */
   useEffect(() => {
     if (!isOpen) return;
 
@@ -69,7 +67,7 @@ export default function VitalAIAssistant({
 
     try {
       const token = localStorage.getItem("vital_token");
-      const response = await fetch("http://localhost:5000/api/ai/query", {
+      const response = await fetch(`${API_BASE_URL}/api/ai/query`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -268,4 +266,3 @@ export default function VitalAIAssistant({
     </div>
   );
 }
-

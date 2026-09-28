@@ -27,6 +27,7 @@ import {
 import PortalShell from "../../components/PortalShell";
 import { getISTGreetingData } from "../../utils/istTime";
 import { apiService } from "../../services/api";
+import { API_BASE_URL } from "../../config";
 import "./DonorDashboard.css";
 
 function urlBase64ToUint8Array(base64String) {
@@ -161,7 +162,7 @@ export function PushNotificationBanner({ user }) {
       }
 
       const reg = await navigator.serviceWorker.ready;
-      const keyRes = await fetch("http://localhost:5000/api/push/vapid-key");
+      const keyRes = await fetch(`${API_BASE_URL}/api/push/vapid-key`);
       const { publicKey } = await keyRes.json();
 
       const subscription = await reg.pushManager.subscribe({
@@ -169,7 +170,7 @@ export function PushNotificationBanner({ user }) {
         applicationServerKey: urlBase64ToUint8Array(publicKey),
       });
 
-      await fetch("http://localhost:5000/api/push/subscribe", {
+      await fetch(`${API_BASE_URL}/api/push/subscribe`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -255,7 +256,7 @@ export function EmergencyAlertCard({ alert: item, currentUser, onResponseSuccess
     try {
       const token = localStorage.getItem("vital_token");
       const res = await fetch(
-        `http://localhost:5000/api/blood-requests/${cardId}/respond`,
+        `${API_BASE_URL}/api/blood-requests/${cardId}/respond`,
         {
           method: "POST",
           headers: {
@@ -452,7 +453,6 @@ export default function DonorDashboard({ user, onBack }) {
   const initialTime = useMemo(() => getISTGreetingData(), []);
   const greeting = initialTime.greeting;
 
-  // Safe native browser query param inspection (works with or without router context)
   const searchParams =
     typeof window !== "undefined"
       ? new URLSearchParams(window.location.search)
@@ -475,7 +475,7 @@ export default function DonorDashboard({ user, onBack }) {
       try {
         const token = localStorage.getItem("vital_token");
 
-        const response = await fetch("http://localhost:5000/api/requests", {
+        const response = await fetch(`${API_BASE_URL}/api/requests`, {
           headers: token ? { Authorization: `Bearer ${token}` } : {},
         });
 
@@ -542,7 +542,7 @@ export default function DonorDashboard({ user, onBack }) {
     try {
       const district = currentDonor.district || "Kamareddy";
       const res = await fetch(
-        `http://localhost:5000/api/camps?district=${district}&status=Medically Verified`
+        `${API_BASE_URL}/api/camps?district=${district}&status=Medically Verified`
       );
       const data = await res.json();
       if (data.success && Array.isArray(data.camps)) {
@@ -565,7 +565,6 @@ export default function DonorDashboard({ user, onBack }) {
     return () => window.clearInterval(requestTimer);
   }, [loadMatchingRequests, fetchUpcomingCamps]);
 
-  // Deep-linking effect for WhatsApp broadcast URLs
   useEffect(() => {
     if (targetRequestId && requests.length > 0) {
       const el = document.getElementById(`request-${targetRequestId}`);

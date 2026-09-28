@@ -27,6 +27,7 @@ import PortalShell from "../../components/PortalShell";
 import { getISTGreetingData } from "../../utils/istTime";
 import { apiService } from "../../services/api";
 import { generateWhatsAppBroadcastUrl } from "../../utils/whatsappBroadcast";
+import { API_BASE_URL } from "../../config";
 import "./BloodBankDashboard.css";
 
 const BLOOD_GROUPS = ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"];
@@ -65,7 +66,7 @@ export function ColdChainBatchManager({ bloodBankId, onBatchUpdate }) {
     if (!bloodBankId) return;
     try {
       const res = await fetch(
-        `http://localhost:5000/api/inventory/batches/${bloodBankId}`
+        `${API_BASE_URL}/api/inventory/batches/${bloodBankId}`
       );
       const data = await res.json();
       if (data.success) {
@@ -92,7 +93,7 @@ export function ColdChainBatchManager({ bloodBankId, onBatchUpdate }) {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/inventory/batches/${batchId}/discard`,
+        `${API_BASE_URL}/api/inventory/batches/${batchId}/discard`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -314,7 +315,7 @@ export default function BloodBankDashboard({ user, onBack }) {
     if (!token) return;
 
     try {
-      let response = await fetch("http://localhost:5000/api/bloodbanks/me", {
+      let response = await fetch(`${API_BASE_URL}/api/bloodbanks/me`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -341,7 +342,7 @@ export default function BloodBankDashboard({ user, onBack }) {
         const district = currentUser.district || "Kamareddy";
 
         response = await fetch(
-          `http://localhost:5000/api/bloodbanks/inventory?district=${district}`
+          `${API_BASE_URL}/api/bloodbanks/inventory?district=${district}`
         );
 
         data = await response.json();
@@ -432,7 +433,7 @@ export default function BloodBankDashboard({ user, onBack }) {
     try {
       const token = localStorage.getItem("vital_token");
       const res = await fetch(
-        `http://localhost:5000/api/blood-requests/${requestId}/dispatch`,
+        `${API_BASE_URL}/api/blood-requests/${requestId}/dispatch`,
         {
           method: "POST",
           headers: {
@@ -503,7 +504,7 @@ export default function BloodBankDashboard({ user, onBack }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/bloodbanks/inventory/update",
+        `${API_BASE_URL}/api/bloodbanks/inventory/update`,
         {
           method: "PATCH",
           headers: {
@@ -545,7 +546,7 @@ export default function BloodBankDashboard({ user, onBack }) {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/bloodbanks/inventory/save",
+        `${API_BASE_URL}/api/bloodbanks/inventory/save`,
         {
           method: "PUT",
           headers: {
@@ -808,7 +809,6 @@ export default function BloodBankDashboard({ user, onBack }) {
                       </span>
                     </div>
 
-                    {/* WhatsApp Quick Dispatch Trigger */}
                     <div style={{ marginTop: "8px" }}>
                       <a
                         href={generateWhatsAppBroadcastUrl({
